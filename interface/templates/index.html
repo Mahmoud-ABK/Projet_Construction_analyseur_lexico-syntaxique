@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Keyword Recommender</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Marketing Keyword Recommender</h1>
+
+    <!-- Conteneur principal pour les sections -->
+    <div class="container" id="content-section">
+        <!-- Section d'importation et de sélection -->
+        <div class="file-selection-container" id="traitement_fichier">
+            <!-- Importation d'un fichier -->
+            <div id="import-section">
+                <h2>Import a text file</h2>
+                <div id="drop-zone">
+                    <p>Drag and drop a file here, or click to select one.</p>
+                    <form method="POST" enctype="multipart/form-data" id="uploadForm">
+                        <input type="file" id="fileInput" name="fichier" accept=".txt" >
+                        <button type="submit" name="importer">Import</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sélection depuis la combobox -->
+            <div id="select-section">
+                <h2>Choose an existing file</h2>
+                <form method="POST">
+                    <label for="fichier">Select a file:</label>
+                    <select name="fichier" id="fichier">
+                        <option value="" disabled selected>-- Choose a file --</option>
+                        {% for fichier in fichiers %}
+                            <option value="{{ fichier }}" {% if fichier == fichier_choisi %}selected{% endif %}>
+                                {{ fichier }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" name="ouvrir">Open</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Affichage du contenu -->
+         
+        {% if contenu_fichier %}
+            <div id="content-section">
+                <h2>File contents: {{ fichier_choisi }}</h2>
+                <pre>{{ contenu_fichier }}</pre>
+            </div>
+        {% endif %}
+
+        <!-- Bouton Compiler -->
+        <div id="compile-section">
+            <button type="button" id="compileButton">Compiler</button>
+        </div>
+        
+        <!-- Affichage les tokens -->
+        <div id="generated-content_tokens"></div>
+
+        <!-- Bouton arbre -->
+        <div id="boutonArbre" style="display: none;">
+            <button type="button" id="arbreButton">Generate a syntax tree</button>
+        </div>
+
+        <!-- Affichage arbre syntaxique -->
+        <div id="generated-content_arbre"></div>
+
+        <!-- Bouton recommandation -->
+        <div id="boutonRecommandation" style="display: none;">
+            <button type="button" id="recommandationButton">Recommendation !</button>
+        </div>
+
+
+        <!-- Affichage recommandation -->
+        <div id="generated-content_recommandation"></div>
+
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
