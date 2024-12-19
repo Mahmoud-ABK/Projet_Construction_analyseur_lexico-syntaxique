@@ -1,4 +1,4 @@
-from modules.tools import load_product_names, create_product_regex, match_product_name, match_symbol, match_word, match_number, classify_word
+from .modules.tools import load_product_names, create_product_regex, match_product_name, match_symbol, match_word, match_number, classify_word
 import os
 BASE_DIR = os.path.dirname(__file__)  
 csv_path = os.path.join(BASE_DIR, 'csv', 'products.csv')

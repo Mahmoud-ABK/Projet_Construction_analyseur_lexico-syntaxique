@@ -1,4 +1,4 @@
-from analyse_lexicale import analyseure_lexicale
+#from analyse_lexicale import analyseure_lexicale
 token_types = [
     "PRODUCT",
     "FEATURE",
