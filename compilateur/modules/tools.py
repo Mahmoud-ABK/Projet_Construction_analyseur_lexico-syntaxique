@@ -56,13 +56,14 @@ def classify_word(word):
     categories = []
 
     # Define the regex pattern for units
-    unit_pattern = r'\b(cm|kg|h|minutes|hours|m|GB|inches|Go|mAh|pouces)'
+    units_regex = r'\b(?:mAh|W|kWh|V|mm|cm|m|km|pouces|g|kg|mg|tonne|Go|To|MHz|GHz|Hz|dpi|°C|°F)\b'
+
 
     # Check if the word matches a unit
-    if re.match(unit_pattern, word):
+    if re.match(units_regex, word):
         categories.append(("UNIT", word))
     else:
-        # Check with SpaCy NLP model for other categories
+        # Use SpaCy NLP model for other categories
         doc = nlp(word)
         for token in doc:
             if token.pos_ == "NOUN":
