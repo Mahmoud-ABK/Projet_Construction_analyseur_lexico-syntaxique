@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 import os
+
 import sys
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from compilateur import analyseure_lexicale
-
+from compilateur import load_product_names, create_product_regex, match_product_name, match_symbol, match_word, match_number, classify_word
 
 app = Flask(__name__)
 
@@ -50,7 +52,8 @@ def compiler():
     ################################
     #l'analyseur lexical
     tokens=analyseure_lexicale(texte)
-    texte_genere = ''.join(''.join(map(str, tup)) for tup in tokens) 
+    #texte_genere = ''.join(''.join(map(str, tup)) for tup in tokens) 
+    texte_genere = "".join(f"&lt;{','.join(map(str, t))}&gt;" for t in tokens)
     print(texte_genere)
     return jsonify({"texte_genere": texte_genere}) 
 

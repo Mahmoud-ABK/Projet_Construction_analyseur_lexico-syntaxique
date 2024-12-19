@@ -1,8 +1,12 @@
-from modules.tools import load_product_names, create_product_regex, match_product_name, match_symbol, match_word, match_number, classify_word
+from .modules.tools import load_product_names, create_product_regex, match_product_name, match_symbol, match_word, match_number, classify_word
+import os
+BASE_DIR = os.path.dirname(__file__)  
+csv_path = os.path.join(BASE_DIR, 'csv', 'products.csv')
 
 def analyseure_lexicale(texte):
     # Load product names from the CSV file
-    csv_file="compilateur/csv/products.csv"
+    #csv_file="compilateur/csv/products.csv"
+    csv_file=csv_path
     product_names = load_product_names(csv_file)
     product_regex = create_product_regex(product_names)
     tokens = []
@@ -50,7 +54,7 @@ Il est disponible en version 128Go et 256Go.
 """
 
 # Analyze the article and print the results
-"""tokens = analyse_lexicale(article)
+"""tokens = analyseure_lexicale(article)
 
 for token in tokens:
     print(token)"""
