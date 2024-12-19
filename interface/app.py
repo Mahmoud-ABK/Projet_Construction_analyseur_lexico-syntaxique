@@ -66,14 +66,6 @@ def compiler():
 def compilerSyntaquique():
     #ici on va appeler l'analyseur synatxique 
     texte_genere,texte_message,texte_validation=parseur(tokens)
-    """
-    texte_message="message de mahmoud"
-    texte_validation=True
-    texte_genere = {
-        "Nom produit": "Produit XYZ",
-        "Adj": ["beau", "mauvais"],
-        "nom": ["hello"]
-    }"""
     print(texte_genere)
     return jsonify({
         "arbre": texte_genere,

@@ -102,7 +102,7 @@ def convertir(result):
 def rec(text):
     t=analyser_produit(text)
     return convertir(t)
-#print(convertir(resultat))
+#print(rec(texte))
 
 
 
