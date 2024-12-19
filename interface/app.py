@@ -6,6 +6,10 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from compilateur import analyseure_lexicale
 from compilateur import load_product_names, create_product_regex, match_product_name, match_symbol, match_word, match_number, classify_word
+from compilateur import parseur
+from compilateur import convertir
+from compilateur import analyser_produit
+
 
 #les variables globale:
 tokens=[]
@@ -61,13 +65,15 @@ def compiler():
 @app.route("/compilerSyntaxique", methods=["POST"])
 def compilerSyntaquique():
     #ici on va appeler l'analyseur synatxique 
+    texte_genere,texte_message,texte_validation=parseur(tokens)
+    """
     texte_message="message de mahmoud"
     texte_validation=True
     texte_genere = {
         "Nom produit": "Produit XYZ",
         "Adj": ["beau", "mauvais"],
         "nom": ["hello"]
-    }
+    }"""
     print(texte_genere)
     return jsonify({
         "arbre": texte_genere,
@@ -80,10 +86,13 @@ def compilerRecommandation():
     data = request.get_json() 
     texte = data.get("texte")  
     #ici on va appeler le recommandateur
-    dic={
+    texte_analyse=analyser_produit(texte)
+    print(texte_analyse)
+    dic=convertir(texte_analyse)
+    """dic={
         "Nom":"nom produit",
         "Description":"description du produit",
-        "pourcentage":"pourcentage du produit"}
+        "pourcentage":"pourcentage du produit"}"""
     texte_nom=dic["Nom"]
     texte_genere = dic["Description"]
     pourcentage_genere=dic["pourcentage"]

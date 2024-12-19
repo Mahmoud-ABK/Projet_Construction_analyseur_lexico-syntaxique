@@ -102,8 +102,8 @@ document.getElementById("arbreButton").addEventListener("click", function () {
             if(texteValidation){
                 treeHTML += `<h2>${texteMessage}</h2>`;
                 // Extraire le nom du produit
-                const nomProduit = arbre["Nom produit"];
-                delete arbre["Nom produit"]; // Supprimer pour ne pas le traiter comme un nœud
+                const nomProduit = arbre["PRODUCT"];
+                delete arbre["PRODUCT"]; // Supprimer pour ne pas le traiter comme un nœud
 
                 // Fonction récursive pour générer le HTML de l'arbre avec un style |__ pour les nœuds
                 function renderTree(node, tree, prefix = "") {

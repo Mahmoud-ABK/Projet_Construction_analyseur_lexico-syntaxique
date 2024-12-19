@@ -99,6 +99,10 @@ def convertir(result):
         "Description": description,
         "pourcentage": pourcentage_recommandation
     }
+def rec(text):
+    t=analyser_produit(text)
+    return convertir(t)
+#print(convertir(resultat))
 
 
 
