@@ -133,6 +133,7 @@ document.getElementById("arbreButton").addEventListener("click", function () {
 
                 // Afficher l'arbre généré dans la page
                 document.getElementById("generated-content_arbre").innerHTML = treeHTML;
+                document.getElementById("boutonRecommandation").style.display = "flex";
                 }
             else{
                 treeHTML += `<h2>${texteMessage}</h2>`;
@@ -149,7 +150,7 @@ document.getElementById("arbreButton").addEventListener("click", function () {
     // Cacher les boutons et autres contenus inutiles
     document.getElementById("generated-content_tokens").style.display = "none";
     document.getElementById("boutonArbre").style.display = "none";
-    document.getElementById("boutonRecommandation").style.display = "flex";
+    //document.getElementById("boutonRecommandation").style.display = "flex";
 });
 
 
@@ -176,6 +177,7 @@ document.getElementById("recommandationButton").addEventListener("click", functi
         // Display the generated text
         document.getElementById("generated-content_recommandation").innerHTML = `
             <h2>Recommendation:</h2>
+            <p>${data.texte_nom}</p>
             <p>${data.texte_genere}</p>
             <div class="percentage-container">
                 <div class="circle">

@@ -80,10 +80,15 @@ def compilerRecommandation():
     data = request.get_json() 
     texte = data.get("texte")  
     #ici on va appeler le recommandateur
-    texte_genere = "la recommandation du produit " 
-    pourcentage_genere="75"
+    dic={
+        "Nom":"nom produit",
+        "Description":"description du produit",
+        "pourcentage":"pourcentage du produit"}
+    texte_nom=dic["Nom"]
+    texte_genere = dic["Description"]
+    pourcentage_genere=dic["pourcentage"]
     print(texte_genere)
-    return jsonify({"texte_genere": texte_genere,"pourcentage_genere": pourcentage_genere})  
+    return jsonify({"texte_genere": texte_genere,"pourcentage_genere": pourcentage_genere,"texte_nom": texte_nom})  
 
 if __name__ == '__main__':
     app.run(debug=True)
