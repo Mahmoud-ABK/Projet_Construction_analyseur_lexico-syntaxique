@@ -7,6 +7,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from compilateur import analyseure_lexicale
 from compilateur import load_product_names, create_product_regex, match_product_name, match_symbol, match_word, match_number, classify_word
 
+#les variables globale:
+tokens=[]
+######################
 app = Flask(__name__)
 
 # Configuration pour le dossier d'uploads
@@ -51,30 +54,41 @@ def compiler():
     texte = data.get("texte")  
     ################################
     #l'analyseur lexical
+    global tokens
     tokens=analyseure_lexicale(texte)
-    #texte_genere = ''.join(''.join(map(str, tup)) for tup in tokens) 
-    texte_genere = "".join(f"&lt;{','.join(map(str, t))}&gt;" for t in tokens)
-    print(texte_genere)
-    return jsonify({"texte_genere": texte_genere}) 
+    return jsonify({"tokens": tokens})
 
 @app.route("/compilerSyntaxique", methods=["POST"])
 def compilerSyntaquique():
-    data = request.get_json() 
-    texte = data.get("texte")  
     #ici on va appeler l'analyseur synatxique 
-    texte_genere = "Arbre du fichier" 
+    texte_message="message de mahmoud"
+    texte_validation=True
+    texte_genere = {
+        "Nom produit": "Produit XYZ",
+        "Adj": ["beau", "mauvais"],
+        "nom": ["hello"]
+    }
     print(texte_genere)
-    return jsonify({"texte_genere": texte_genere})  
+    return jsonify({
+        "arbre": texte_genere,
+        "validation": texte_validation,
+        "message":texte_message
+    })
 
 @app.route("/compilerRecommandation", methods=["POST"])
 def compilerRecommandation():
     data = request.get_json() 
     texte = data.get("texte")  
     #ici on va appeler le recommandateur
-    texte_genere = "la recommandation du produit " 
-    pourcentage_genere="75"
+    dic={
+        "Nom":"nom produit",
+        "Description":"description du produit",
+        "pourcentage":"pourcentage du produit"}
+    texte_nom=dic["Nom"]
+    texte_genere = dic["Description"]
+    pourcentage_genere=dic["pourcentage"]
     print(texte_genere)
-    return jsonify({"texte_genere": texte_genere,"pourcentage_genere": pourcentage_genere})  
+    return jsonify({"texte_genere": texte_genere,"pourcentage_genere": pourcentage_genere,"texte_nom": texte_nom})  
 
 if __name__ == '__main__':
     app.run(debug=True)
